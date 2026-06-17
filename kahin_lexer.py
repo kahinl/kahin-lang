@@ -45,9 +45,12 @@ except ImportError:
 
 TURKCE_KEYWORDS = {
     # Kontrol yapıları
-    'ice_aktar', 'tanimla', 'eger', 'degilse_eger', 'degilse',
+    'ice_aktar', 'kaynaktan', 'tanimla', 'eger', 'degilse_eger', 'degilse',
     'dondu_boyunca', 'her_biri_icin', 'icinde', 'dondur',
     'dur', 'devam_et', 'gec', 'ile', 'yukle',
+
+    # Mantık operatörleri
+    've', 'veya', 'degil', 'ozdes',
 
     # Hata yakalama
     'dene', 'yakala', 'sonunda', 'firlat', 'olumla',
@@ -67,9 +70,10 @@ TURKCE_KEYWORDS = {
 
 # Python karşılıkları
 KEYWORD_MAP = {
-    'ice_aktar': 'import', 'tanimla': 'def', 'eger': 'if',
+    'ice_aktar': 'import', 'kaynaktan': 'from', 'tanimla': 'def', 'eger': 'if',
     'degilse_eger': 'elif', 'degilse': 'else', 'dondu_boyunca': 'while',
     'her_biri_icin': 'for', 'icinde': 'in', 'dondur': 'return',
+    've': 'and', 'veya': 'or', 'degil': 'not', 'ozdes': 'is',
     'dur': 'break', 'devam_et': 'continue', 'gec': 'pass',
     'ile': 'with', 'yukle': 'yield', 'dene': 'try',
     'yakala': 'except', 'sonunda': 'finally', 'firlat': 'raise',
