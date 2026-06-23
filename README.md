@@ -1,298 +1,172 @@
-# 🚀 KAHİN v14.0
+# Kahin
 
-**Türkçe Programlama Dili - Proje Dizini**
-
----
-
-## 📁 Proje Yapısı
+Türkçe yazılan kaynağı Python'a çeviren bir programlama dili. `eger`, `tanimla`,
+`her_biri_icin` gibi Türkçe anahtar kelimelerle yazarsın; Kahin bunu Python'a
+çevirip çalıştırır. Altta CPython çalıştığı için Python'da ne varsa (sınıflar,
+f-string, generator, match/case, tüm kütüphaneler) Kahin'de de var.
 
 ```
-kahin_projesi/
-├── KAHIN_REHBER.md        # Kapsamlı kullanım rehberi (957 satır)
-├── README.md              # Bu dosya
-├── kahin_binary.py        # Kahin transpiler binary (kaynak)
-├── build.py               # Build script (binary'i kur)
-├── merhaba.kahin          # Basit örnek
-├── test.kahin             # Test dosyası
-└── ornekler/
-    ├── hizli_test.kahin   # Hızlı test
-    └── tam_turkce_test.kahin  # Kapsamlı test
+tanimla selamla(isim):
+    dondur "Merhaba " + isim
+
+her_biri_icin ad icinde ["Ada", "Can", "Derya"]:
+    yazdir(selamla(ad))
 ```
 
----
+```
+Merhaba Ada
+Merhaba Can
+Merhaba Derya
+```
 
-## 🎯 Dosya Açıklamaları
+## Kurulum
 
-### Çekirdek Dosyalar
-
-| Dosya | Açıklama | Boyut |
-|-------|----------|-------|
-| `kahin_binary.py` | **ÇEKİRDEK** - Kahin transpiler (Python script) | 14 KB |
-| `build.py` | Binary'i `/usr/bin/kahin` konumuna kurar | 1 KB |
-
-### Dokümantasyon
-
-| Dosya | Açıklama | Boyut |
-|-------|----------|-------|
-| `KAHIN_REHBER.md` | Başlangıçtan ileri seviyeye tam rehber | 20 KB |
-| `README.md` | Bu dosya - proje yapısı | 2 KB |
-
-### Örnekler
-
-| Dosya | Açıklama |
-|-------|----------|
-| `merhaba.kahin` | Merhaba Dünya örneği |
-| `test.kahin` | Basit test |
-| `ornekler/hizli_test.kahin` | Hızlı özellik testi |
-| `ornekler/tam_turkce_test.kahin` | Kapsamlı test |
-
----
-
-## ⚙️ Kurulum
-
-### Binary Zaten Kurulu
-
-Kahin binary `/usr/bin/kahin` konumunda:
+Gereksinim: Python 3.10+ (match/case için). Linux x86-64'te Rust hızlandırıcı
+otomatik devreye girer; başka platformda Python yedeği çalışır.
 
 ```bash
-which kahin
-# /data/data/com.termux/files/usr/bin/kahin
-
-kahin --versiyon
-# KAHİN v14.0
+git clone <repo-url> kahin
+cd kahin
+python kahin_cli.py program.kahin
 ```
 
-### Binary'i Yeniden Kurmak
-
-Eğer binary silinmişse veya güncellenmişse:
+İstersen `kahin` komutu olarak da kurabilirsin:
 
 ```bash
-cd ~/kahin_projesi
-python3 build.py
-```
-
----
-
-## 🚀 Hızlı Başlangıç
-
-### 1. İlk Program
-
-```bash
-cd ~/kahin_projesi
-kahin merhaba.kahin
-```
-
-**Çıktı:**
-```
-Merhaba Kahin!
-...
-```
-
-### 2. Test Dosyası
-
-```bash
-kahin test.kahin
-```
-
-### 3. Kapsamlı Test
-
-```bash
-kahin ornekler/hizli_test.kahin
-```
-
-### 4. Kendi Programını Yaz
-
-```bash
-nano program.kahin
-# Kodunu yaz, kaydet
-
+python install.py     # launcher script'i PATH'e koyar
 kahin program.kahin
 ```
 
----
-
-## 📖 Öğrenme
-
-**Kapsamlı rehber:**
-```bash
-cat KAHIN_REHBER.md
-# veya
-less KAHIN_REHBER.md
-```
-
-**İçindekiler:**
-- Temel sözdizimi
-- Veri türleri
-- Kontrol yapıları
-- Döngüler
-- Fonksiyonlar
-- Listeler ve sözlükler
-- Modüller
-- Hata yakalama
-- İleri seviye (OOP, lambda, decorator)
-- Teknik detaylar (transpiler nasıl çalışır)
-- SSS
-
----
-
-## 🔧 Teknik Bilgiler
-
-### Kahin Binary Nedir?
-
-`kahin_binary.py` bir **Python script**:
-- Kahin kodunu Python'a çeviren transpiler
-- String-safe (literal koruması)
-- f-string desteği
-- 5 adımlı çeviri algoritması
-
-### Nasıl Çalışır?
-
-```
-Kahin Kodu → Transpiler → Python Kodu → Python VM → Çıktı
-```
-
-**Transpiler Adımları:**
-1. Yorum çevirisi (`//` → `#`)
-2. String koruması (placeholder)
-3. Kelime çevirisi (Türkçe → İngilizce, regex)
-4. f-string içi işleme
-5. String geri yükleme
-
-Detaylar için: `KAHIN_REHBER.md` → Teknik Detaylar
-
----
-
-## 🔨 Geliştirme
-
-### Binary'i Düzenle
+## Kullanım
 
 ```bash
-nano kahin_binary.py
-# Değişiklik yap, kaydet
-
-# Global konuma kur
-python3 build.py
-
-# Test et
-kahin test.kahin
+kahin program.kahin            # çalıştır
+kahin program.kahin --debug    # çevrilen Python'u göster
+kahin program.kahin --cache-yok # bytecode cache'i atla
+kahin                          # interaktif kabuk (REPL)
+kahin --yardim                 # yardım
+kahin --versiyon               # sürüm
 ```
 
-### Yeni Anahtar Kelime Ekle
+## Dil
 
-`kahin_binary.py` içinde `KELIME_HARITASI` sözlüğünü düzenle:
+### Anahtar kelimeler
 
-```python
-KELIME_HARITASI = {
-    # Mevcut kelimeler...
-    "yeni_kelime": "python_karsiligi",
-}
+| Türkçe | Python | Türkçe | Python |
+|--------|--------|--------|--------|
+| `eger` | if | `tanimla` | def |
+| `degilse_eger` | elif | `dondur` | return |
+| `degilse` | else | `sinif` | class |
+| `her_biri_icin` | for | `ile` | with |
+| `dondu_boyunca` | while | `dene` / `yakala` | try / except |
+| `icinde` | in | `sonunda` | finally |
+| `dur` | break | `firlat` | raise |
+| `devam_et` | continue | `ice_aktar` | import |
+| `gec` | pass | `kaynaktan` | from |
+| `ve` / `veya` / `degil` | and / or / not | `eslestir` / `desen` | match / case |
+| `dogru` / `yanlis` / `hic` | True / False / None | `lambda` | lambda |
+
+Yerleşik fonksiyonlar da Türkçe: `yazdir` (print), `uzunluk` (len), `aralik`
+(range), `tam_sayi` (int), `metin` (str), `liste` (list), `sozluk` (dict),
+`sirala` (sorted), `topla` (sum) ...
+
+### Kahin'e özel sözdizimi
+
+Python'da birebir karşılığı olmayan, ön-işlemede çevrilen kısayollar:
+
+```
+// yorum             -> # yorum
+1..10                -> range(1, 10)
+1..=10               -> range(1, 11)
+x |> f |> g          -> g(f(x))
 ```
 
-Sonra:
-```bash
-python3 build.py
+### match/case
+
+```
+tanimla durum_acikla(kod):
+    eslestir kod:
+        desen 200:
+            dondur "Tamam"
+        desen 404:
+            dondur "Bulunamadi"
+        desen 500 | 502 | 503:
+            dondur "Sunucu hatasi"
+        desen _:
+            dondur "Bilinmeyen"
 ```
 
----
+Literal, OR (`|`), wildcard (`_`), capture ve guard (`eger`) desenleri çalışır.
 
-## 🐛 Sorun Giderme
+### Standart kütüphane
 
-### Binary Çalışmıyor
+Türkçe API'li çekirdek modüller (`kahin_lib/`):
 
-**Kontrol et:**
-```bash
-which kahin
-file $(which kahin)
-kahin --versiyon
+```
+ice_aktar dosya
+dosya.yaz("/tmp/not.txt", "selam")
+yazdir(dosya.oku("/tmp/not.txt"))
+
+ice_aktar veri
+n = veri.cozumle('{"ad": "Kahin"}')
+
+ice_aktar zaman
+yazdir(zaman.gun_adi())
 ```
 
-**Yeniden kur:**
-```bash
-cd ~/kahin_projesi
-python3 build.py
+- `dosya` — oku, yaz, ekle, kaldir, var_mi
+- `veri` — JSON: cozumle, serile, dosyadan_oku, dosyaya_yaz
+- `zaman` — simdi, duraklat, tarih, gun_adi
+
+Python kütüphaneleri de doğrudan kullanılabilir: `ice_aktar sistem` (os),
+`ice_aktar istek` (requests), `kaynaktan math ice_aktar sqrt`.
+
+### Hata mesajları
+
+Çalışma zamanı hataları Türkçe ve `.kahin` satırını gösterir:
+
+```
+Çalışma zamanı hatası:
+  program.kahin:5 satırında
+  Sıfıra bölme: division by zero
 ```
 
-### Dosya Bulunamadı Hatası
+Ham Python traceback için `--debug` kullan.
 
-```bash
-❌ Dosya bulunamadı: program.kahin
-```
+## Tek dosya binary (Python'suz çalıştırma)
 
-**Çözüm:** Dosya yolunu kontrol et:
-```bash
-ls -la program.kahin
-# veya tam yol kullan
-kahin /tam/yol/program.kahin
-```
-
-### Syntax Hatası
-
-```bash
-❌ SÖZDİZİMİ HATASI!
-```
-
-**Debug modu ile çalıştır:**
-```bash
-kahin program.kahin --debug
-```
-
-Transpile edilmiş Python kodunu göreceksin.
-
----
-
-## 📊 İstatistikler
-
-**Proje Boyutu:** ~40 KB (sadece text dosyalar)
-
-**Binary:** 14 KB (Python script)
-
-**Dokümantasyon:** 20 KB (957 satır)
-
-**Örnekler:** 6 KB
-
----
-
-## ✨ Özellikler
-
-- ✅ Tam Türkçe sözdizimi
-- ✅ Python ekosistemi
-- ✅ Ultra hızlı (~0.1s)
-- ✅ String-safe transpiler
-- ✅ f-string desteği
-- ✅ Debug modu
-- ✅ Detaylı hata mesajları
-- ✅ OOP, lambda, decorator desteği
-- ✅ Tüm Python kütüphaneleri kullanılabilir
-
----
-
-## 🔗 Komutlar
+Nuitka ile her şeyi (Python motoru dahil) tek dosyaya gömebilirsin:
 
 ```bash
-# Versiyon
-kahin --versiyon
-
-# Yardım
-kahin --yardim
-
-# Normal çalıştırma
-kahin program.kahin
-
-# Debug modu
-kahin program.kahin --debug
+python build_nuitka.py     # -> dist/kahin
 ```
 
----
+Çıkan `dist/kahin` hedef makinede Python kurulu olmasa bile çalışır. Sadece
+Linux x86-64'e taşınabilir; başka platform için orada derlemek gerekir.
 
-## 📞 Destek
+## Nasıl çalışıyor
 
-**Sorun mu var?**
-1. `KAHIN_REHBER.md` → SSS bölümünü oku
-2. `kahin --yardim` komutunu çalıştır
-3. Debug modu ile test et: `kahin program.kahin --debug`
+`.kahin` → ön-işleme → CPython tokenize → keyword değişimi → ast.parse →
+optimize → compile → exec. İç işleyiş ve Rust hızlandırıcının yeri için
+[MIMARI.md](MIMARI.md).
 
----
+Rust hızlandırıcıyı yeniden derlemek için:
 
-**🚀 Mutlu Kodlamalar!**
+```bash
+bash build_rust.sh    # cargo + kahin_rs.so kurar
+```
 
-*Kahin v14.0 - Türkçe Programlama Dili*
+## Proje yapısı
+
+```
+kahin_cli.py      giriş noktası (argüman, cache, REPL, hata)
+kahin_lexer.py    tokenize + keyword + ön-işleme (Python yedeği)
+kahin_ast.py      ast.parse + optimize transformer
+kahin_cache.py    bytecode cache (~/.kahin_cache/)
+kahin_hata.py     Python exception -> Türkçe mesaj
+kahin_repl.py     interaktif kabuk
+kahin_lib/        Türkçe stdlib (dosya, veri, zaman)
+kahin_rs/         Rust ön-işleme kaynağı -> kahin_rs.so
+build_nuitka.py   tek dosya binary derleme
+MIMARI.md         iç işleyiş dokümanı
+```

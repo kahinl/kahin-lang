@@ -33,8 +33,12 @@ from enum import IntEnum
 from typing import List, Tuple, NamedTuple
 
 # Rust hızlandırıcı (PyO3). Varsa ön işleme Rust'ta yapılır, yoksa Python fallback.
+# Not: PyPy gibi farklı runtime'larda .so adıyla yüklenip içi boş kalabiliyor;
+# to_python yoksa fallback'e düşmek için hasattr ile teyit ediyoruz.
 try:
     import kahin_rs as _kahin_rs
+    if not hasattr(_kahin_rs, "to_python"):
+        _kahin_rs = None
 except ImportError:
     _kahin_rs = None
 
