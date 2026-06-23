@@ -221,3 +221,4 @@ MIMARI.md         iç işleyiş dokümanı
 [MIT](LICENSE) © kahinl
 
 <p align="center"><sub>Türkçe ile kod yaz.</sub></p>
+
